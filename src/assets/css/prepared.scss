@@ -1,0 +1,18 @@
+@font-face {
+  src: url("@/assets/fonts/Iran.eot") format('eot'), url("@/assets/fonts/Iran.woff") format('woff');
+  font-family: 'Iran';
+}
+
+body {
+  //font-family: "Iran";
+}
+
+:root {
+  --color-first: #D7D7D7;
+  --color-second: #8a8a8a;
+  --color-third: #499cd5;
+}
+
+input:focus {
+  outline: none;
+}
