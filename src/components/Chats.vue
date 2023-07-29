@@ -19,38 +19,40 @@
         </button>
       </div>
       <div class="chats-wrapper w-full">
-        <div v-for="item in chatList" :key="item.id" @click="chatId=item.id"
-             class="chat p-3 w-full py-2 border-b cursor-pointer flex justify-between items-center">
-          <div class="profile-img border rounded-lg w-20 h-20 mr-2">
-            <img class="rounded-lg w-full h-full" :src="require(`../assets/img/${item.profileImageUrl}`)"
-                 alt="user profile">
-          </div>
-          <div class="message-preview w-8/12 flex flex-col justify-start items-start">
-            <div class="top">
-              <h6 class="text-sm font-semibold">{{ item.title }}</h6>
-              <p class="text-xs mt-1">{{ item.messenger }} : <span class="">{{ item.latestMessage }}</span></p>
+        <div v-for="item in chatList" :key="item.id" @click="sendId()"
+             class="chat p-3 w-full py-2 border-b">
+          <div class=" cursor-pointer flex justify-between items-center w-full h-full" @click="chatId = item.id">
+            <div class="profile-img border rounded-lg w-20 h-20 mr-2">
+              <img class="rounded-lg w-full h-full" :src="require(`../assets/img/${item.profileImageUrl}`)"
+                   alt="user profile">
             </div>
-            <div class="bottom categories flex justify-between items-center mt-3">
-              <div
-                  class="ctg-item border rounded text-xs p-1 w-16 text-center mr-2 text-red-500 border-red-500 font-semibold">
-                Inbox
+            <div class="message-preview w-8/12 flex flex-col justify-start items-start">
+              <div class="top">
+                <h6 class="text-sm font-semibold">{{ item.title }}</h6>
+                <p class="text-xs mt-1">{{ item.messenger }} : <span class="">{{ item.latestMessage }}</span></p>
               </div>
-              <div
-                  class="ctg-item border rounded text-xs p-1 w-16 text-center text-cyan-500 border-cyan-500 font-semibold">
-                {{ item.category }}
+              <div class="bottom categories flex justify-between items-center mt-3">
+                <div
+                    class="ctg-item border rounded text-xs p-1 w-16 text-center mr-2 text-red-500 border-red-500 font-semibold">
+                  Inbox
+                </div>
+                <div
+                    class="ctg-item border rounded text-xs p-1 w-16 text-center text-cyan-500 border-cyan-500 font-semibold">
+                  {{ item.category }}
+                </div>
               </div>
             </div>
-          </div>
-          <div class="info flex flex-col justify-between items-center">
-            <div class="date-time mb-2">
-              <p>{{ item.dateTime }}</p>
-            </div>
-            <div class="messages-num mb-2 bg-red-500 text-white rounded h-full flex items-center">
-              <p class="font-bold" v-if="item.messageNumbers===''">{{ item.messageNumbers }}</p>
-              <p class="font-bold px-1" v-else>{{ item.messageNumbers }}</p>
-            </div>
-            <div class="open w-5">
-              <img class="w-full" src="../assets/img/icon/chevron-down.png" alt="open">
+            <div class="info flex flex-col justify-between items-center">
+              <div class="date-time mb-2">
+                <p>{{ item.dateTime }}</p>
+              </div>
+              <div class="messages-num mb-2 bg-red-500 text-white rounded h-full flex items-center">
+                <p class="font-bold" v-if="item.messageNumbers===''">{{ item.messageNumbers }}</p>
+                <p class="font-bold px-1" v-else>{{ item.messageNumbers }}</p>
+              </div>
+              <div class="open w-5">
+                <img class="w-full" src="../assets/img/icon/chevron-down.png" alt="open">
+              </div>
             </div>
           </div>
         </div>
@@ -159,6 +161,10 @@ export default {
       ]
     }
   },
-  methods: {}
+  methods: {
+    sendId(e){
+      this.$emit('get-id', {chatId: this.chatId});
+    }
+  }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="chatroom-wrapper h-screen overflow-scroll">
-    <div class="inner w-full relative" v-for="item in chatsData" :key="item.id">
+    <div class="inner w-full relative" v-for="item in chatsData" :key="item.id" v-if="item.id === chatId">
       <div class="top p-3 px-6 w-full border-b fixed top-0 flex justify-start items-center">
         <div class="back-btn">
           <button class="mr-3 mt-1" @click="$emit('go-back')">
@@ -18,8 +18,9 @@
           </div>
         </div>
       </div>
-      <div class="content p-4">
-        <div v-for="(msgItem,index) in item.messages" :key="index" class="flex flex-col justify-between">
+      <div class="content p-4" v-if="item.id === chatId">
+        <div v-for="(msgItem,index) in item.messages" :key="index"
+             class="flex flex-col justify-between">
           <div class="date-wrapper self-center my-2">
             <p class="text-white bg-gray-400 rounded-3xl py-1 font-bold px-4 text-xs">{{ msgItem.date }}</p>
           </div>
@@ -47,7 +48,8 @@
           </div>
         </div>
       </div>
-      <div class="message-input-wrapper px-3 bottom-0 w-full bg-gray-200 flex justify-center items-center">
+      <div
+           class="message-input-wrapper px-3 bottom-0 w-full bg-gray-200 flex justify-center items-center">
         <form class="w-full h-full flex justify-between items-center">
           <div class="cursor-pointer bg-white border border-gray-300 rounded-lg p-2 w-10 h-10">
             <label for="attach" class="voice-label w-full h-full cursor-pointer">
@@ -76,6 +78,7 @@ import linkify from 'vue-linkify';
 Vue.directive('linkified', linkify);
 
 export default {
+  props: ['chatId'],
   name: "Chatroom",
   data() {
     return {
@@ -84,11 +87,11 @@ export default {
       chatsData: [
         {
           id: 1,
-          title: 'مشکلات فنی',
-          category: 'Question',
+          title: 'Code Bot',
+          category: 'Group',
           avatarUrl: 'user1.jpg',
-          lastSeen: '11:45 AM',
-          senderName: 'Eng.Saba Abdoli',
+          lastSeen: '10:49 AM',
+          senderName: 'TRITA Intelligence Innovations',
           receiverName: 'Eng.Mahdi Hashemi Karbalaee',
           messages: [
             {
@@ -173,8 +176,744 @@ export default {
               date: 'February 13 2023'
             },
           ]
-        }
-      ]
+        },
+        {
+          id: 2,
+          title: 'سلام',
+          category: 'Question',
+          avatarUrl: 'user2.jpg',
+          lastSeen: '11:45 AM',
+          senderName: 'Someone',
+          receiverName: 'Eng.Mahdi Hashemi Karbalaee',
+          messages: [
+            {
+              id: 100,
+              uniqueId: 500,
+              data: 'اینم تیکت میکنی لطفا',
+              time: '15:34',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023',
+            },
+            {
+              id: 200,
+              uniqueId: 501,
+              data: 'بله حتما',
+              time: '15:37',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 502,
+              data: '',
+              time: '15:23',
+              forwarded: true,
+              forwardedFrom: 'Ms.Fateme Okhravi',
+              date: 'February 8 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 503,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '9:56',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 504,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 505,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '15:23',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 506,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '15:24',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 507,
+              data: 'لورم ایپسوم',
+              time: '15:25',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 508,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+          ]
+        },
+        {
+          id: 3,
+          title: 'New User',
+          category: 'Group',
+          avatarUrl: 'newUser.png',
+          lastSeen: '12:45 PM',
+          senderName: 'Someone New',
+          receiverName: 'Eng.Mahdi Hashemi Karbalaee',
+          messages: [
+            {
+              id: 100,
+              uniqueId: 500,
+              data: 'اینم تیکت میکنی لطفا',
+              time: '15:34',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023',
+            },
+            {
+              id: 200,
+              uniqueId: 501,
+              data: 'بله حتما',
+              time: '15:37',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 502,
+              data: '',
+              time: '15:23',
+              forwarded: true,
+              forwardedFrom: 'Ms.Fateme Okhravi',
+              date: 'February 8 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 503,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '9:56',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 504,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 505,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '15:23',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 506,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '15:24',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 507,
+              data: 'لورم ایپسوم',
+              time: '15:25',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 508,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+          ]
+        },
+        {
+          id: 4,
+          title: 'کافه',
+          category: 'Ticket',
+          avatarUrl: 'user3.jpg',
+          lastSeen: 'Jun 28',
+          senderName: 'hasti daneshkia',
+          receiverName: 'Eng.Mahdi Hashemi Karbalaee',
+          messages: [
+            {
+              id: 100,
+              uniqueId: 500,
+              data: 'اینم تیکت میکنی لطفا',
+              time: '15:34',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023',
+            },
+            {
+              id: 200,
+              uniqueId: 501,
+              data: 'بله حتما',
+              time: '15:37',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 502,
+              data: '',
+              time: '15:23',
+              forwarded: true,
+              forwardedFrom: 'Ms.Fateme Okhravi',
+              date: 'February 8 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 503,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '9:56',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 504,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 505,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '15:23',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 506,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '15:24',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 507,
+              data: 'لورم ایپسوم',
+              time: '15:25',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 508,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+          ]
+        },
+        {
+          id: 5,
+          title: 'Code Bot',
+          category: 'Ticket',
+          avatarUrl: 'user3.jpg',
+          lastSeen: 'Jun 28',
+          senderName: 'hasti daneshkia',
+          receiverName: 'Eng.Mahdi Hashemi Karbalaee',
+          messages: [
+            {
+              id: 100,
+              uniqueId: 500,
+              data: 'اینم تیکت میکنی لطفا',
+              time: '15:34',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023',
+            },
+            {
+              id: 200,
+              uniqueId: 501,
+              data: 'بله حتما',
+              time: '15:37',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 502,
+              data: '',
+              time: '15:23',
+              forwarded: true,
+              forwardedFrom: 'Ms.Fateme Okhravi',
+              date: 'February 8 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 503,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '9:56',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 504,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 505,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '15:23',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 506,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '15:24',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 507,
+              data: 'لورم ایپسوم',
+              time: '15:25',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 508,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+          ]
+        },
+        {
+          id: 6,
+          title: 'سلام',
+          category: 'Question',
+          avatarUrl: 'user2.jpg',
+          lastSeen: '11:45 AM',
+          senderName: 'Someone',
+          receiverName: 'Eng.Mahdi Hashemi Karbalaee',
+          messages: [
+            {
+              id: 100,
+              uniqueId: 500,
+              data: 'اینم تیکت میکنی لطفا',
+              time: '15:34',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023',
+            },
+            {
+              id: 200,
+              uniqueId: 501,
+              data: 'بله حتما',
+              time: '15:37',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 502,
+              data: '',
+              time: '15:23',
+              forwarded: true,
+              forwardedFrom: 'Ms.Fateme Okhravi',
+              date: 'February 8 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 503,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '9:56',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 504,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 505,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '15:23',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 506,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '15:24',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 507,
+              data: 'لورم ایپسوم',
+              time: '15:25',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 508,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+          ]
+        },
+        {
+          id: 7,
+          title: 'New User',
+          category: 'Group',
+          avatarUrl: 'newUser.png',
+          lastSeen: '12:45 PM',
+          senderName: 'Someone New',
+          receiverName: 'Eng.Mahdi Hashemi Karbalaee',
+          messages: [
+            {
+              id: 100,
+              uniqueId: 500,
+              data: 'اینم تیکت میکنی لطفا',
+              time: '15:34',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023',
+            },
+            {
+              id: 200,
+              uniqueId: 501,
+              data: 'بله حتما',
+              time: '15:37',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 502,
+              data: '',
+              time: '15:23',
+              forwarded: true,
+              forwardedFrom: 'Ms.Fateme Okhravi',
+              date: 'February 8 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 503,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '9:56',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 504,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 505,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '15:23',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 506,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '15:24',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 507,
+              data: 'لورم ایپسوم',
+              time: '15:25',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 508,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+          ]
+        },
+        {
+          id: 8,
+          title: 'کافه',
+          category: 'Ticket',
+          avatarUrl: 'user3.jpg',
+          lastSeen: 'Jun 28',
+          senderName: 'hasti daneshkia',
+          receiverName: 'Eng.Mahdi Hashemi Karbalaee',
+          messages: [
+            {
+              id: 100,
+              uniqueId: 500,
+              data: 'اینم تیکت میکنی لطفا',
+              time: '15:34',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023',
+            },
+            {
+              id: 200,
+              uniqueId: 501,
+              data: 'بله حتما',
+              time: '15:37',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 502,
+              data: '',
+              time: '15:23',
+              forwarded: true,
+              forwardedFrom: 'Ms.Fateme Okhravi',
+              date: 'February 8 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 503,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '9:56',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 504,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 505,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '15:23',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 506,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '15:24',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 507,
+              data: 'لورم ایپسوم',
+              time: '15:25',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 508,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+          ]
+        },
+        {
+          id: 9,
+          title: 'Code Bot',
+          category: 'Group',
+          avatarUrl: 'user1.jpg',
+          lastSeen: '10:49 AM',
+          senderName: 'TRITA Intelligence Innovations',
+          receiverName: 'Eng.Mahdi Hashemi Karbalaee',
+          messages: [
+            {
+              id: 100,
+              uniqueId: 500,
+              data: 'اینم تیکت میکنی لطفا',
+              time: '15:34',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023',
+            },
+            {
+              id: 200,
+              uniqueId: 501,
+              data: 'بله حتما',
+              time: '15:37',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 7 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 502,
+              data: '',
+              time: '15:23',
+              forwarded: true,
+              forwardedFrom: 'Ms.Fateme Okhravi',
+              date: 'February 8 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 503,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '9:56',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 504,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 505,
+              data: 'https://github.com/ReihaneENS/MessengerTask',
+              time: '15:23',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 100,
+              uniqueId: 506,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '15:24',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 507,
+              data: 'لورم ایپسوم',
+              time: '15:25',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 15 2023'
+            },
+            {
+              id: 200,
+              uniqueId: 508,
+              data: 'لینک ریپازیتوری تسک مسنجر',
+              time: '9:57',
+              forwarded: false,
+              forwardedFrom: '',
+              date: 'February 13 2023'
+            },
+          ]
+        },
+      ],
     }
   },
 }
